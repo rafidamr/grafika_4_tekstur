@@ -4,15 +4,16 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <common/shader.hpp>
-#include <common/controls.hpp>
-#include <common/texture.hpp>
+#include <shader.hpp>
+#include <controls.hpp>
+//#include <texture.hpp>
 
 using namespace glm;
 
 GLFWwindow* window;
 
 void initGLFW();
+GLuint loadBMP_custom(const char * imagepath);
 
 int main(void)
 {
@@ -264,21 +265,6 @@ int main(void)
 		1.0f,-0.8f,-1.5f,
 		1.0f, 0.7f,-1.5f,
 
-		// kaca samping
-		1.01f, 0.0f, -0.5f,
-		1.01f, 0.0f, -1.4f,
-		1.01f, 0.6f, -1.4f,
-		1.01f, 0.6f, -0.5f,
-		1.01f, 0.0f, -0.5f,
-		1.01f, 0.6f, -1.4f,
-
-		1.01f, 0.6f, 0.5f,
-		1.01f, 0.0f, 0.5f,
-		1.01f, 0.6f, -0.4f,
-		1.01f, 0.0f, 0.5f,
-		1.01f, 0.0f, -0.4f,
-		1.01f, 0.6f, -0.4f,
-
 		//body
 		1.0f,-0.8f,-1.5f,
 		1.0f, 0.7f, 0.6f,
@@ -293,21 +279,6 @@ int main(void)
 		1.0f, 0.7f, 0.6f,
 		-1.0f, 0.7f, 0.6f,
 		1.0f,-0.8f, 0.6f,
-
-		//kaca samping
-		-1.01f, 0.0f, -0.4f,
-		-1.01f, 0.0f, 0.5f,
-		-1.01f, 0.6f, 0.5f,
-		-1.01f, 0.6f, -0.4f,
-		-1.01f, 0.0f, -0.4f,
-		-1.01f, 0.6f, 0.5f,
-
-		-1.01f, 0.0f, -1.4f,
-		-1.01f, 0.0f, -0.5f,
-		-1.01f, 0.6f, -0.5f,
-		-1.01f, 0.6f, -1.4f,
-		-1.01f, 0.0f, -1.4f,
-		-1.01f, 0.6f, -0.5f,
 
 		//back upper
 		-1.0f, 0,-2.0f,
@@ -1173,194 +1144,210 @@ int main(void)
 
 
 	GLfloat texture[] = {
-		// 0.29, 0.86,
-		// 0.29, 0.83,
-		// 0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		//1 front bottom
+		0.27, 0.78,
+		0.38, 0.78,
+		0.27, 0.89,
+		0, 0,
+		0, 0,
+		0, 0,
+		//2
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
+		//3
+		0.27, 0.8,
+		0.38, 0.8,
+		0.27, 0.89,
+
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		//4
+		0.1, 0.18,
+		0.1, 0.07,
+		0.45, 0.07,
+		//plat depan
+		0, 0,
+		0, 0,
+		0, 0,
+		0.000059f, 1.0f - 0.000004f,
+		0.000103f, 1.0f - 0.336048f,
+		0.335973f, 1.0f - 0.335903f,
+		//front bottom
+		0.27, 0.8,
+		0.38, 0.8,
+		0.27, 0.89,
+
+		0.38, 0.78,
+		0.27, 0.89,
+		0.27, 0.78,
+		0, 0,
+		0, 0,
+		0, 0,
+
+		0.1, 0.18,
+		0.1, 0.07,
+		0.4, 0.07,
+
+		0.45, 0.18,
+		0.1, 0.18,
+		0.45, 0.07,
+		//front upper 1
+		0.45, 0.18,
+		0.1, 0.18,
+		0.45, 0.07,
+		0.45, 0.18,
+		0.1, 0.18,
+		0.45, 0.07,
+
+		0.45, 0.18,
+		0.1, 0.18,
+		0.45, 0.07,
+		0.45, 0.18,
+		0.1, 0.18,
+		0.45, 0.07,
+
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
+
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
+
+		//front of front glass
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
+
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
+
+		//front bottom 2
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
+
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		//front upper
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0.13, 0.33,
+		0.13, 0.24,
+		0.4, 0.24,
+		0, 0,
+		0, 0,
+		0, 0,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0.29, 0.86,	//red body
+		0.29, 0.83,
+		0.3, 0.83,
+		0.29, 0.86,
+		0.29, 0.83,
+		0.3, 0.83,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		0, 0,
+		0, 0,
+		0, 0,
+		0.4, 0.33,
+		0.13, 0.33,
+		0.4, 0.24,
 
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
+		
+		0.2f, 0.75f,
+		0.3f, 0.75f,
+		0.3f, 0.95f,
+		
 		0.000059f, 1.0f - 0.000004f,
 		0.000103f, 1.0f - 0.336048f,
 		0.335973f, 1.0f - 0.335903f,
-
+		
 		0.000059f, 1.0f - 0.000004f,
 		0.000103f, 1.0f - 0.336048f,
 		0.335973f, 1.0f - 0.335903f,
+			
 		0.000059f, 1.0f - 0.000004f,
 		0.000103f, 1.0f - 0.336048f,
 		0.335973f, 1.0f - 0.335903f,
+			
 		0.000059f, 1.0f - 0.000004f,
 		0.000103f, 1.0f - 0.336048f,
 		0.335973f, 1.0f - 0.335903f,
-		0.000059f, 1.0f - 0.000004f,
+			/*0.000059f, 1.0f - 0.000004f,
 		0.000103f, 1.0f - 0.336048f,
 		0.335973f, 1.0f - 0.335903f,
 
@@ -2230,6 +2217,7 @@ int main(void)
 		0.000059f, 1.0f - 0.000004f,
 		0.000103f, 1.0f - 0.336048f,
 		0.335973f, 1.0f - 0.335903f,
+		*/
 	};
 
 
@@ -2346,4 +2334,91 @@ void initGLFW() {
 	// Set the mouse at the center of the screen
 	glfwPollEvents();
 	glfwSetCursorPos(window, 1024 / 2, 768 / 2);
+}
+
+GLuint loadBMP_custom(const char * imagepath) {
+
+	printf("Reading image %s\n", imagepath);
+
+	// Data read from the header of the BMP file
+	unsigned char header[54];
+	unsigned int dataPos;
+	unsigned int imageSize;
+	unsigned int width, height;
+	// Actual RGB data
+	unsigned char * data;
+
+	// Open the file
+	errno_t err;
+	FILE * file;
+	if ((err = fopen_s(&file, imagepath, "rb")) != 0) {
+		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
+		getchar();
+		return 0;
+	}
+
+	// Read the header, i.e. the 54 first bytes
+
+	// If less than 54 bytes are read, problem
+	if (fread(header, 1, 54, file) != 54) {
+		printf("Not a correct BMP file\n");
+		fclose(file);
+		return 0;
+	}
+	// A BMP files always begins with "BM"
+	if (header[0] != 'B' || header[1] != 'M') {
+		printf("Not a correct BMP file\n");
+		fclose(file);
+		return 0;
+	}
+	// Make sure this is a 24bpp file
+	if (*(int*)&(header[0x1E]) != 0) { printf("Not a correct BMP file\n");    fclose(file); return 0; }
+	if (*(int*)&(header[0x1C]) != 24) { printf("Not a correct BMP file\n");    fclose(file); return 0; }
+
+	// Read the information about the image
+	dataPos = *(int*)&(header[0x0A]);
+	imageSize = *(int*)&(header[0x22]);
+	width = *(int*)&(header[0x12]);
+	height = *(int*)&(header[0x16]);
+
+	// Some BMP files are misformatted, guess missing information
+	if (imageSize == 0)    imageSize = width*height * 3; // 3 : one byte for each Red, Green and Blue component
+	if (dataPos == 0)      dataPos = 54; // The BMP header is done that way
+
+										 // Create a buffer
+	data = new unsigned char[imageSize];
+
+	// Read the actual data from the file into the buffer
+	fread(data, 1, imageSize, file);
+
+	// Everything is in memory now, the file can be closed.
+	fclose(file);
+
+	// Create one OpenGL texture
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+
+	// "Bind" the newly created texture : all future texture functions will modify this texture
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	// Give the image to OpenGL
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+
+	// OpenGL has now copied the data. Free our own version
+	delete[] data;
+
+	// Poor filtering, or ...
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
+
+	// ... nice trilinear filtering ...
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	// ... which requires mipmaps. Generate them automatically.
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	// Return the ID of the texture we just created
+	return textureID;
 }
